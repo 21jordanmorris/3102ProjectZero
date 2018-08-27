@@ -128,7 +128,12 @@ public class PrimeGenerator implements PrimeGeneratorAPI {
     }
     
     public int getPrime(int nth) throws IllegalArgumentException {
-        return 0;
+        if(nth > (size()/Math.log(size())) * (1 + 0.992/Math.log(size()))) {
+            throw new IllegalArgumentException("Parameter 'nth' is invalid");
+        }
+        else {
+             
+        }
     }
     
     public int getMax() throws IllegalArgumentException {

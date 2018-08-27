@@ -8,7 +8,7 @@ import java.util.Scanner;
  * A test bed for the PrimeGenerator implementation.  
  * @author Duncan, Jordan Morris
  * @since 8-21-2018
- * @see PrimeGeneratorAPI, PrimeGenerator.
+ * @see PrimeGeneratorAPI, PrimeGenerator
  */
 
 public class PrimeGeneratorDemo 
