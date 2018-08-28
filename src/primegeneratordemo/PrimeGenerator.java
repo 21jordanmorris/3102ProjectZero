@@ -12,18 +12,18 @@ import java.util.ArrayList;
  */
 
 public class PrimeGenerator implements PrimeGeneratorAPI {
-    
+
     /**
      * A reference to a boolean array.
      */
     private boolean[] sequence;
-    
+
     /**
      * An integer one less than the capacity of the array to account
      * for index 0 in the sequence array.
      */
     private int length;
-    
+
     /**
      * Creates a Boolean sequence of length 100 using the Sieve of
      * Eratosthenes, where sequence[k] is true, when k is prime and
@@ -34,7 +34,7 @@ public class PrimeGenerator implements PrimeGeneratorAPI {
         length = sequence.length;
         eratosthenesSieve(sequence);
     }
-    
+
     /**
      * Generates a boolean sequence [0,...,length] that indicates
      * whether sequence[k] is prime or composite using the
@@ -42,7 +42,7 @@ public class PrimeGenerator implements PrimeGeneratorAPI {
      * @param n an integer >= 1
      * @param alg 'E' or 'e' for the Sieve of Eratosthenes sieve
      * and 'n' or 'N' for the naive/brute-force algorithm
-     * @throws IllegalArgumentException when n is less than 1 or 
+     * @throws IllegalArgumentException when n is less than 1 or
      * parameter alg is not 'n', 'N', 'E', or 'e'
      */
     public PrimeGenerator(int n, char alg) throws IllegalArgumentException {
@@ -50,17 +50,17 @@ public class PrimeGenerator implements PrimeGeneratorAPI {
             throw new IllegalArgumentException("Must enter a positive non-zero integer.");
         else if(alg != 'n' && alg != 'N' && alg != 'e' && alg != 'E')
             throw new IllegalArgumentException("Parameter alg must be one of 'n', 'N', 'E', or 'e'");
-        
-        sequence = new boolean[n+1];
-        length = sequence.length;
-        if(alg == 'n' || alg == 'N') {
-            naiveSieve(sequence);
-        }
         else {
-            eratosthenesSieve(sequence);
+            sequence = new boolean[n + 1];
+            length = sequence.length;
+            if (alg == 'n' || alg == 'N') {
+                naiveSieve(sequence);
+            } else {
+                eratosthenesSieve(sequence);
+            }
         }
     }
-    
+
     /**
      * An auxiliary method that sets seq[k] to true if k is prime
      * and false if k is composite using the Eratosthenes Sieve
@@ -81,7 +81,7 @@ public class PrimeGenerator implements PrimeGeneratorAPI {
                         seq[i] = false;
                 }
             }
-        }   
+        }
     }
 
     /**
@@ -96,7 +96,7 @@ public class PrimeGenerator implements PrimeGeneratorAPI {
             seq[i] = isPrime(i);
         }
     }
-    
+
     public ArrayList<Integer> generate(int n) throws IllegalArgumentException {
         if(n > length)
             throw new IllegalArgumentException("Upper bound cannot exceed size of current sequence");
@@ -107,7 +107,7 @@ public class PrimeGenerator implements PrimeGeneratorAPI {
         }
         return upperBoundedArray;
     }
-    
+
     public boolean isPrime(int n) {
         if(n < 2)
             return false;
@@ -126,16 +126,16 @@ public class PrimeGenerator implements PrimeGeneratorAPI {
             return false;
         }
     }
-    
+
     public int getPrime(int nth) throws IllegalArgumentException {
         if(nth > (size()/Math.log(size())) * (1 + 0.992/Math.log(size()))) {
             throw new IllegalArgumentException("Parameter 'nth' is invalid");
         }
         else {
-             
+            return nth;
         }
     }
-    
+
     public int getMax() throws IllegalArgumentException {
         for(int i = sequence.length-1; i >= 0; i--) {
             if(sequence[i] == true)
@@ -143,11 +143,11 @@ public class PrimeGenerator implements PrimeGeneratorAPI {
         }
         throw new IllegalArgumentException("There are no prime numbers in the given set of numbers");
     }
-    
+
     public int size() {
         return length;
     }
-    
+
     public String toString() {
         String pseq = "[";
         for(int i = 0; i < size(); i++) {
