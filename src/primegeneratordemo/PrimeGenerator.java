@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 /**
  * Provides methods that perform the Sieve of Eratosthenes
- * and brute-force algorithm or assist in doing so.
+ * and brute-force algorithm or assist in doing so that are used
+ * in the PrimeGeneratorDemo class.
  * CSC 3102 Programming Project # 0
  * @author Jordan Morris
- * @since 8-22-2018
+ * @since 9-1-2018
  * @see PrimeGeneratorAPI
  */
 
@@ -69,14 +70,13 @@ public class PrimeGenerator implements PrimeGeneratorAPI {
      * k is prime
      */
     private void eratosthenesSieve(boolean[] seq) {
-        length = seq.length;
         seq[0] = false;
         seq[1] = false;
         if(length >= 2) {
             for(int i = 2; i < length; i++)
                 seq[i] = true;
             for(int p = 2; p*p <= length; p++) {
-                if(seq[p] == true) {
+                if(seq[p]) {
                     for(int i = p*2; i < length; i+= p)
                         seq[i] = false;
                 }
@@ -91,7 +91,6 @@ public class PrimeGenerator implements PrimeGeneratorAPI {
      * k is prime
      */
     private void naiveSieve(boolean[] seq) {
-        length = seq.length;
         for(int i = 0; i < length; i++) {
             seq[i] = isPrime(i);
         }
@@ -102,7 +101,7 @@ public class PrimeGenerator implements PrimeGeneratorAPI {
             throw new IllegalArgumentException("Upper bound cannot exceed size of current sequence");
         ArrayList<Integer> upperBoundedArray = new ArrayList<Integer>();
         for(int i = 0; i <= n; i++) {
-            if(sequence[i] == true)
+            if(sequence[i])
                 upperBoundedArray.add(i);
         }
         return upperBoundedArray;
@@ -128,17 +127,23 @@ public class PrimeGenerator implements PrimeGeneratorAPI {
     }
 
     public int getPrime(int nth) throws IllegalArgumentException {
-        if(nth > (size()/Math.log(size())) * (1 + 0.992/Math.log(size()))) {
-            throw new IllegalArgumentException("Parameter 'nth' is invalid");
+        int currentPrime = 2;
+        int primeCounter = 0;
+        for(int i = 0; i < size(); i++) {
+            if(sequence[i]) {
+                currentPrime = i;
+                primeCounter++;
+                if(primeCounter == nth) {
+                    return currentPrime;
+                }
+            }
         }
-        else {
-            return nth;
-        }
+        return currentPrime;
     }
 
     public int getMax() throws IllegalArgumentException {
         for(int i = sequence.length-1; i >= 0; i--) {
-            if(sequence[i] == true)
+            if(sequence[i])
                 return i;
         }
         throw new IllegalArgumentException("There are no prime numbers in the given set of numbers");
@@ -151,7 +156,7 @@ public class PrimeGenerator implements PrimeGeneratorAPI {
     public String toString() {
         String pseq = "[";
         for(int i = 0; i < size(); i++) {
-            if(sequence[i] == true)
+            if(sequence[i])
                 pseq += i + ", ";
         }
         if(pseq.length() == 1)
