@@ -1,5 +1,5 @@
 # PrimeGenerator
-Project 0 - Prime Generator
+Brute-Force vs Eratosthenes’ Prime Sieves
 
 # Learning Objectives
 • Setting up your Programming Environment and Tools
