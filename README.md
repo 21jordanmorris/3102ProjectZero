@@ -1,14 +1,14 @@
 # PrimeGenerator
 Project 0 - Prime Generator
 
-Learning Objectives
- Setting up your Programming Environment and Tools
+# Learning Objectives
+• Setting up your Programming Environment and Tools
   
- Review of the Use of Control Structures
+• Review of the Use of Control Structures
   
- Empirical Analysis of Two Prime Sequence Generation Algorithms
+• Empirical Analysis of Two Prime Sequence Generation Algorithms
   
- Familiarization with the Course Programming Conventions
+• Familiarization with the Course Programming Conventions
   
 The purpose of the first programming exercise is to familiarize you with the
 programming standards and coding conventions that are required for this
